@@ -14,11 +14,11 @@ private
 public
 
 \ Does nothing but introduce a test
-: test:{ \ -- 
+: test:begin_test \ -- 
 ;
 
 \ Convert data-stack to array, compare with current content of r-stack
-: test:} \ * -- 
+: test:end_test \ * -- 
 	depth a:close r> #p:get_op a:= 
 	if
 		2drop "OK" . cr
@@ -33,25 +33,25 @@ public
 	reset \ clear data stack
 ;
 
-: test:.eqs. \ * --
+: test:test_eqs \ * --
 	( >s swap >s s:= ) #p:set_op
 	\ Convert data-stack to array and move to r-stack
 	depth a:close >r 
 ;
 
-: test:.nes. \ * --
+: test:test_nes \ * --
 	( >s swap >s s:= not ) #p:set_op
 	\ Convert data-stack to array and move to r-stack
 	depth a:close >r 
 ;
 
-: test:.eq. \ * --
+: test:test_eq \ * --
 	( >n swap >n n:= ) #p:set_op
 	\ Convert data-stack to array and move to r-stack
 	depth a:close >r 
 ;
 
-: test:.ne. \ * --
+: test:test_ne \ * --
 	( >n swap >n n:= not ) #p:set_op
 	\ Convert data-stack to array and move to r-stack
 	depth a:close >r 
